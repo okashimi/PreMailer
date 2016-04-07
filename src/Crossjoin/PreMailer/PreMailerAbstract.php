@@ -482,7 +482,7 @@ abstract class PreMailerAbstract
 
         $text = preg_replace_callback('/^([^\n]+)$/m', function($match) use ($charset, $textLineMaxLength) {
                 $break = "\n";
-                $parts = preg_split('/((?:\(\t[^\t]+\t\))|[^\p{L}\p{N}])/', $match[0], -1, PREG_SPLIT_DELIM_CAPTURE);
+                $parts = preg_split('/((?:\(\t[^\t]+\t\))|[^\p{L}\p{N}])/u', $match[0], -1, PREG_SPLIT_DELIM_CAPTURE);
 
                 $return = "";
                 $brLength = mb_strlen(trim($break, "\r\n"), $charset);
