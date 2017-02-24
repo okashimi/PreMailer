@@ -27,6 +27,7 @@ abstract class PreMailerAbstract
     const OPTION_HTML_CLASSES_REMOVE = 2;
 
     const OPTION_TEXT_LINE_WIDTH = 'textLineWidth';
+    const OPTION_LINE_CHAR_WIDTH = 'lineCharWidth';
 
     const OPTION_CSS_WRITER_CLASS = 'cssWriterClass';
     const OPTION_CSS_WRITER_CLASS_COMPACT = '\Crossjoin\Css\Writer\Compact';
@@ -41,6 +42,7 @@ abstract class PreMailerAbstract
         self::OPTION_HTML_COMMENTS => self::OPTION_HTML_COMMENTS_REMOVE,
         self::OPTION_CSS_WRITER_CLASS => self::OPTION_CSS_WRITER_CLASS_COMPACT,
         self::OPTION_TEXT_LINE_WIDTH => 75,
+        self::OPTION_LINE_CHAR_WIDTH => 75,
     ];
 
     /**
@@ -136,6 +138,7 @@ abstract class PreMailerAbstract
                         }
                         break;
                     case self::OPTION_TEXT_LINE_WIDTH:
+                    case self::OPTION_LINE_CHAR_WIDTH:
                         if (is_int($value)) {
                             if ($value <= 0) {
                                 throw new \LengthException(
@@ -552,6 +555,7 @@ abstract class PreMailerAbstract
     protected function convertHtmlToText(\DOMNodeList $nodes)
     {
         $text = "";
+        $lineCharWidth = $this->getOption(self::OPTION_LINE_CHAR_WIDTH);
 
         /** @var \DOMElement $node */
         foreach ($nodes as $node) {
@@ -576,6 +580,8 @@ abstract class PreMailerAbstract
                 $lineCharAfter = "*";
             } elseif ($node->nodeName === "h2") {
                 $lineCharBefore = "=";
+            } elseif ($node->nodeName === "h3") {
+                $lineBreaksBefore = 1;
             }
 
             if ($node->nodeName === '#text') {
@@ -602,7 +608,7 @@ abstract class PreMailerAbstract
                 $prefix = "*";
                 $suffix = "*";
             } elseif ($node->nodeName === 'hr') {
-                $text .= str_repeat('-', 75) . "\n\n";
+                $text .= str_repeat('-', $lineCharWidth) . "\n\n";
             }
 
             if ($node->hasChildNodes()) {
@@ -612,9 +618,9 @@ abstract class PreMailerAbstract
 
                 $text .= $prefix;
 
-                $text .= $lineCharBefore ? str_repeat($lineCharBefore, 75) . "\n" : "";
+                $text .= $lineCharBefore ? str_repeat($lineCharBefore, $lineCharWidth) . "\n" : "";
                 $text .= $addText;
-                $text .= $lineCharAfter ? "\n" . str_repeat($lineCharAfter, 75) . "\n" : "";
+                $text .= $lineCharAfter ? "\n" . str_repeat($lineCharAfter, $lineCharWidth) . "\n" : "";
 
                 $text .= $suffix;
 
