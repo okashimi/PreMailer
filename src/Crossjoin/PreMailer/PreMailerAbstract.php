@@ -580,6 +580,8 @@ abstract class PreMailerAbstract
                 $lineCharAfter = "*";
             } elseif ($node->nodeName === "h2") {
                 $lineCharBefore = "=";
+            } elseif ($node->nodeName === "h3") {
+                $lineBreaksBefore = 1;
             }
 
             if ($node->nodeName === '#text') {
