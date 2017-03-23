@@ -609,6 +609,8 @@ abstract class PreMailerAbstract
                 $suffix = "*";
             } elseif ($node->nodeName === 'hr') {
                 $text .= str_repeat('-', $lineCharWidth) . "\n\n";
+            } elseif ($node->nodeName === 'br') {
+                $text .= "\n";
             }
 
             if ($node->hasChildNodes()) {
