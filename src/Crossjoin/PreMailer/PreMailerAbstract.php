@@ -496,7 +496,7 @@ abstract class PreMailerAbstract
                     // and mark links as non-breakable
                     $breakLongLines = true;
                     if (strpos($part, "\t")) {
-                        $part = str_replace("\t", mb_convert_encoding("\xE2\x80\x8C", $charset, "UTF-8"), $part);
+                        $part = str_replace("\t", mb_convert_encoding("\xE2\x80\x8B", $charset, "UTF-8"), $part);
                         $breakLongLines = false;
                     }
 
