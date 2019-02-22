@@ -566,6 +566,9 @@ abstract class PreMailerAbstract
             $prefix = "";
             $suffix = "";
 
+            $attr = $node->attributes ? $node->attributes->getNamedItem('data-premailer') : null;
+            $dataPremailer = $attr ? $attr->nodeValue : null;
+
             if (in_array($node->nodeName, ["h1", "h2", "h3", "h4", "h5", "h6", "h"])) {
                 $lineCharAfter = "=";
                 $lineBreaksAfter = 2;
@@ -593,7 +596,7 @@ abstract class PreMailerAbstract
                 if ($textContent !== "") {
                     $text .= $textContent;
                 }
-            } elseif ($node->nodeName === 'a') {
+            } elseif ($node->nodeName === 'a' && $dataPremailer !== 'ignore') {
                 $href = "";
                 if ($node->attributes !== null) {
                     $hrefAttribute = $node->attributes->getNamedItem("href");
