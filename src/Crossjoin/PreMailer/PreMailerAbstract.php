@@ -605,7 +605,7 @@ abstract class PreMailerAbstract
                     }
                 }
                 if ($href !== "") {
-                    $suffix = " (\t" . $href . "\t)";
+                    $suffix = " (\t " . $href . " \t)";
                 }
             } elseif ($node->nodeName === 'b' || $node->nodeName === 'strong') {
                 $prefix = "*";
