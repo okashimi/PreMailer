@@ -25,7 +25,7 @@
     "repositories": [
         {
           "type": "git",
-          "url": "https://github.com/okashimi/PreMailer.git"
+          "url": "https://github.com/okashimi/Css.git"
         }
     ],
     "autoload": {
