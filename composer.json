@@ -22,6 +22,12 @@
         "crossjoin/css": "*",
         "symfony/css-selector": "^2.7.1"
     },
+    "repositories": [
+        {
+          "type": "git",
+          "url": "https://github.com/okashimi/Css.git"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Crossjoin\\PreMailer\\": "src/Crossjoin/PreMailer/"
